@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenschutzerklärung – Last Bounce</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0d0f;
+      --surface: #16161a;
+      --border: #2a2a30;
+      --accent: #c8f135;
+      --accent-dim: rgba(200, 241, 53, 0.08);
+      --text: #e8e8ec;
+      --text-muted: #7a7a8a;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(200, 241, 53, 0.2);
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .meta {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .meta span::before {
+      content: '// ';
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2::before {
+      content: attr(data-n);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    h2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h3 {
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--text);
+      margin: 24px 0 10px;
+      padding-left: 14px;
+      border-left: 2px solid var(--accent);
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* Data cards */
+    .data-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .data-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .data-item:last-child { border-bottom: none; }
+
+    .data-key {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      padding: 12px 16px;
+      background: rgba(200, 241, 53, 0.04);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      padding-top: 14px;
+    }
+
+    .data-val {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Rights grid */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .right-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .right-card:hover { border-color: rgba(200, 241, 53, 0.3); }
+
+    .right-card .art {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+
+    .right-card .name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Legal basis tag */
+    .legal-basis {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .legal-basis::before {
+      content: '⚖';
+      font-size: 10px;
+    }
+
+    /* Links */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200, 241, 53, 0.3);
+      transition: border-color 0.2s;
+    }
+
+    a:hover { border-color: var(--accent); }
+
+    /* Contact block */
+    .contact-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(200, 241, 53, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .contact-value {
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Note box */
+    .note {
+      background: var(--accent-dim);
+      border: 1px solid rgba(200, 241, 53, 0.15);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 16px 0;
+    }
+
+    @media (max-width: 600px) {
+      .data-item { grid-template-columns: 1fr; }
+      .data-key { border-right: none; border-bottom: 1px solid var(--border); }
+      .rights-grid { grid-template-columns: 1fr 1fr; }
+      .contact-block { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="badge">Datenschutzerklärung</div>
+    <h1>Last Bounce</h1>
+    <div class="meta">
+      <span>Stand: 24. April 2026</span>
+      <span>studio.devko.lastbounce</span>
+      <span>DSGVO-konform</span>
+    </div>
+  </header>
+
+  <section>
+    <p>Diese Datenschutzerklärung informiert dich darüber, welche personenbezogenen Daten in der mobilen Anwendung <strong style="color:var(--text)">Last Bounce</strong> verarbeitet werden, wie wir sie nutzen und welche Rechte du hast.</p>
+  </section>
+
+  <!-- 1. Verantwortlicher -->
+  <section>
+    <h2 data-n="01">Verantwortlicher</h2>
+    <div class="contact-block">
+      <div class="contact-icon">👤</div>
+      <div>
+        <div class="contact-label">Verantwortlich im Sinne der DSGVO</div>
+        <div class="contact-value">Jeremiah Blunser</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="contact-block">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">E-Mail</div>
+          <div class="contact-value"><a href="mailto:hello.devko.studio@gmail.com">hello.devko.studio@gmail.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Datenverarbeitung -->
+  <section>
+    <h2 data-n="02">Welche Daten wir verarbeiten und warum</h2>
+    <p>Last Bounce verlangt keine Registrierung und speichert keine persönlichen Profile auf eigenen Servern. Die App nutzt Google-Dienste, die ihrerseits Daten verarbeiten.</p>
+
+    <h3>Werbung (Google AdMob)</h3>
+    <p>Zur Finanzierung der kostenlosen App zeigen wir Werbung über Google AdMob (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland).</p>
+    <div class="data-list">
+      <div class="data-item"><div class="data-key">Werbe-ID</div><div class="data-val">Android Advertising ID – geräteeigene, zurücksetzbare ID für Auslieferung und Frequenzsteuerung</div></div>
+      <div class="data-item"><div class="data-key">IP-Adresse</div><div class="data-val">Grobe Lokalisierung und Betrugsprävention</div></div>
+      <div class="data-item"><div class="data-key">Gerätedaten</div><div class="data-val">Modell, Betriebssystemversion, Sprache, Bildschirmgröße</div></div>
+      <div class="data-item"><div class="data-key">Ad-Interaktionen</div><div class="data-val">Ob eine Anzeige angeschaut, geklickt oder beendet wurde</div></div>
+      <div class="data-item"><div class="data-key">Ungef. Standort</div><div class="data-val">Abgeleitet aus IP-Adresse – keine GPS-Daten</div></div>
+    </div>
+    <div class="legal-basis">Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) · Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse)</div>
+
+    <h3>Einwilligungsverwaltung (Google UMP SDK)</h3>
+    <p>Beim ersten App-Start zeigen wir im EWR, UK und der Schweiz einen Zustimmungsdialog über das User Messaging Platform SDK. Deine Auswahl wird lokal im IAB-TCF-Format gespeichert und kann jederzeit unter <strong style="color:var(--text)">„Datenschutz-Einstellungen"</strong> im App-Menü geändert werden.</p>
+    <div class="legal-basis">Art. 6 Abs. 1 lit. c DSGVO (rechtliche Verpflichtung)</div>
+
+    <h3>Analyse und App-Optimierung (Firebase Analytics)</h3>
+    <div class="data-list">
+      <div class="data-item"><div class="data-key">App Instance ID</div><div class="data-val">Zufällige ID – identifiziert nicht das Gerät oder die Person</div></div>
+      <div class="data-item"><div class="data-key">Spielereignisse</div><div class="data-val">Spielstart, Spielende, Punkte-Meilensteine (10/25/50/100/200), Continue-Nutzung, neuer Highscore</div></div>
+      <div class="data-item"><div class="data-key">Session-Daten</div><div class="data-val">Dauer und Häufigkeit der App-Nutzung</div></div>
+      <div class="data-item"><div class="data-key">Gerätedaten</div><div class="data-val">Gerät- und Betriebssysteminformationen</div></div>
+      <div class="data-item"><div class="data-key">Ungef. Standort</div><div class="data-val">Auf Länder-/Regionsebene</div></div>
+    </div>
+    <div class="note">Es werden <strong>keine</strong> Eingaben, Sprachaufnahmen, Kontaktdaten oder sonstigen sensiblen Inhalte verarbeitet.</div>
+    <div class="legal-basis">Art. 6 Abs. 1 lit. a DSGVO · Art. 6 Abs. 1 lit. f DSGVO</div>
+
+    <h3>Fehler- und Absturzberichte (Firebase Crashlytics)</h3>
+    <div class="data-list">
+      <div class="data-item"><div class="data-key">Stacktrace</div><div class="data-val">Art und Ort des Fehlers</div></div>
+      <div class="data-item"><div class="data-key">Gerätezustand</div><div class="data-val">Speicher, Orientierung, Netzwerkstatus zum Absturzzeitpunkt</div></div>
+      <div class="data-item"><div class="data-key">Installations-ID</div><div class="data-val">Nicht personenidentifizierend</div></div>
+      <div class="data-item"><div class="data-key">App-Version</div><div class="data-val">App- und Betriebssystemversion</div></div>
+    </div>
+    <div class="legal-basis">Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an App-Stabilität)</div>
+
+    <h3>Spielbalance-Steuerung (Firebase Remote Config)</h3>
+    <p>Die App fragt beim Start Konfigurationswerte (z. B. Schwerkraft, Sprungstärke, Spike-Dichte) von Firebase ab. Dabei wird nur die App Instance ID übermittelt – keine personenbezogenen Daten.</p>
+    <div class="legal-basis">Art. 6 Abs. 1 lit. f DSGVO</div>
+
+    <h3>Lokal gespeicherte Daten</h3>
+    <p>Folgende Daten werden nur auf deinem Gerät gespeichert und verlassen es nicht:</p>
+    <div class="data-list">
+      <div class="data-item"><div class="data-key">Highscore</div><div class="data-val">Dein persönlicher Höchststand</div></div>
+      <div class="data-item"><div class="data-key">Continue-Zähler</div><div class="data-val">Wie oft du die Continue-Funktion genutzt hast</div></div>
+      <div class="data-item"><div class="data-key">Einwilligung</div><div class="data-val">Deine Entscheidung im UMP-Dialog</div></div>
+    </div>
+    <p style="margin-top:12px">Diese Daten werden gelöscht, wenn du die App deinstallierst oder ihren Speicher in den Geräte-Einstellungen leerst.</p>
+  </section>
+
+  <!-- 3. Drittländer -->
+  <section>
+    <h2 data-n="03">Datenübermittlung in Drittländer</h2>
+    <p>Google verarbeitet Daten auch auf Servern in den USA und anderen Ländern außerhalb des EWR. Google hat sich dem EU-US Data Privacy Framework unterworfen und nutzt Standardvertragsklauseln gemäß Art. 46 DSGVO.</p>
+    <div class="data-list">
+      <div class="data-item"><div class="data-key">Google Datenschutz</div><div class="data-val"><a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></div></div>
+      <div class="data-item"><div class="data-key">AdMob</div><div class="data-val"><a href="https://support.google.com/admob/answer/6128543" target="_blank">support.google.com/admob/answer/6128543</a></div></div>
+      <div class="data-item"><div class="data-key">Firebase</div><div class="data-val"><a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a></div></div>
+    </div>
+  </section>
+
+  <!-- 4. Speicherdauer -->
+  <section>
+    <h2 data-n="04">Speicherdauer</h2>
+    <div class="data-list">
+      <div class="data-item"><div class="data-key">Analytics</div><div class="data-val">2 bis 14 Monate (gemäß Google-Dokumentation)</div></div>
+      <div class="data-item"><div class="data-key">Crashlytics</div><div class="data-val">90 Tage</div></div>
+      <div class="data-item"><div class="data-key">Lokale Daten</div><div class="data-val">Bis zur Deinstallation oder manuellen Löschung</div></div>
+    </div>
+  </section>
+
+  <!-- 5. Rechte -->
+  <section>
+    <h2 data-n="05">Deine Rechte</h2>
+    <div class="rights-grid">
+      <div class="right-card"><div class="art">Art. 15 DSGVO</div><div class="name">Auskunft</div></div>
+      <div class="right-card"><div class="art">Art. 16 DSGVO</div><div class="name">Berichtigung</div></div>
+      <div class="right-card"><div class="art">Art. 17 DSGVO</div><div class="name">Löschung</div></div>
+      <div class="right-card"><div class="art">Art. 18 DSGVO</div><div class="name">Einschränkung</div></div>
+      <div class="right-card"><div class="art">Art. 20 DSGVO</div><div class="name">Datenübertragbarkeit</div></div>
+      <div class="right-card"><div class="art">Art. 21 DSGVO</div><div class="name">Widerspruch</div></div>
+      <div class="right-card"><div class="art">Art. 7 Abs. 3 DSGVO</div><div class="name">Widerruf der Einwilligung</div></div>
+    </div>
+    <p>Du kannst diese Rechte durch eine Nachricht an die oben genannte Kontaktadresse ausüben.</p>
+  </section>
+
+  <!-- 6. Einwilligung ändern -->
+  <section>
+    <h2 data-n="06">Einwilligung ändern oder widerrufen</h2>
+    <p>Öffne in Last Bounce das Start-Menü und tippe auf <strong style="color:var(--text)">„Datenschutz-Einstellungen"</strong>. Der Zustimmungsdialog erscheint erneut und du kannst deine Auswahl anpassen.</p>
+    <p>Unabhängig davon kannst du unter <strong style="color:var(--text)">Einstellungen → Datenschutz → Werbung</strong> deine Werbe-ID zurücksetzen oder personalisierte Werbung komplett deaktivieren.</p>
+  </section>
+
+  <!-- 7. Kinder -->
+  <section>
+    <h2 data-n="07">Kinder</h2>
+    <p>Last Bounce ist nicht speziell an Kinder unter 13 Jahren gerichtet. Wir erheben wissentlich keine personenbezogenen Daten von Kindern unter 13 Jahren. Sollten entsprechende Daten ohne Einwilligung der Erziehungsberechtigten erhoben worden sein, werden diese unverzüglich gelöscht.</p>
+  </section>
+
+  <!-- 8. Aufsichtsbehörde -->
+  <section>
+    <h2 data-n="08">Beschwerderecht bei einer Aufsichtsbehörde</h2>
+    <p>Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn du der Ansicht bist, dass die Verarbeitung deiner Daten gegen die DSGVO verstößt. Zuständig ist insbesondere die Behörde deines Wohnsitzlandes.</p>
+    <p><a href="https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html" target="_blank">Übersicht der Landesbehörden → bfdi.bund.de</a></p>
+  </section>
+
+  <!-- 9. Änderungen -->
+  <section>
+    <h2 data-n="09">Änderungen dieser Datenschutzerklärung</h2>
+    <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder Funktionsänderungen der App anzupassen. Die jeweils aktuelle Version ist unter dieser URL abrufbar. Wesentliche Änderungen werden im App-Startbildschirm angekündigt.</p>
+  </section>
+
+  <!-- 10. Kontakt -->
+  <section>
+    <h2 data-n="10">Kontakt</h2>
+    <div class="contact-block">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <div class="contact-label">Bei Fragen zur Verarbeitung deiner Daten</div>
+        <div class="contact-value"><a href="mailto:hello.devko.studio@gmail.com">hello.devko.studio@gmail.com</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Devko Studio · Jeremiah Blunser</span>
+    <span>Last Bounce · studio.devko.lastbounce</span>
+  </footer>
+
+</div>
+</body>
+</html>
